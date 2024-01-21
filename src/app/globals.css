@@ -26,8 +26,16 @@
     rgb(var(--background-start-rgb));
 }
 
+body * {
+  font-family: monospace;
+}
+
 @layer utilities {
   .text-balance {
     text-wrap: balance;
   }
+}
+
+img {
+  display: block;
 }

@@ -1,0 +1,109 @@
+.meme-generator {
+  height: 100vh;
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(to bottom, transparent, rgb(255, 255, 255))
+    rgb(214, 219, 220);
+
+  .meme-header {
+    padding: 20px 5%;
+    display: flex;
+    flex-wrap: wrap;
+    color: #fff;
+    background: #6441a5;
+    background: linear-gradient(90deg, #2a0845, #6441a5);
+
+    h1 {
+      font-size: 50px;
+      font-weight: bold;
+      margin-left: 50px;
+    }
+  }
+
+  .meme-gen-wrapper {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 5%;
+    flex-wrap: wrap;
+
+    .meme-moderate-area {
+      width: 40%;
+      display: flex;
+      flex-wrap: wrap;
+      flex-direction: column;
+      font-size: 20px;
+      margin-left: 80px;
+
+      input {
+        outline: none;
+        border: 1px solid grey;
+        margin-bottom: 20px;
+        padding: 5px 10px;
+        border-radius: 2px;
+        max-width: 100%;
+      }
+
+
+    }
+
+    .meme-random {
+      flex: 1;
+
+      .meme-img-wrap {
+        position: relative;
+        margin-bottom: 20px;
+        img {
+          object-fit: contain;
+          object-position: top left;
+          width: 100%;
+          border-radius: 2px;
+          height: 100%;
+          max-height: calc(100vh - 300px);
+        }
+        h2 {
+          position: absolute;
+          color: #ffffff;
+          text-align: center;
+          width: fit-content;
+          font-size: 2em;
+          font-family: impact, sans-serif;
+          text-transform: uppercase;
+          letter-spacing: 1px;
+          text-shadow:
+            2px 2px 0 #000,
+            -2px -2px 0 #000,
+            2px -2px 0 #000,
+            -2px 2px 0 #000,
+            0 2px 0 #000,
+            2px 0 0 #000,
+            0 -2px 0 #000,
+            -2px 0 0 #000,
+            2px 2px 5px #000;
+        }
+
+        .text-top {
+          top: 15px;
+        }
+        .text-bottom {
+          bottom: 15px;
+        }
+      }
+
+      .gen-random-meme {
+        margin: 0 auto;
+      }
+    }
+  }
+}
+
+.meme-btn {
+  color: #fff;
+  background: #6441a5;
+  background: linear-gradient(90deg, #2a0845, #6441a5);
+  width: fit-content;
+  padding: 5px 15px;
+  border-radius: 2px;
+  text-align: center;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  font-size: 20px;
+}
