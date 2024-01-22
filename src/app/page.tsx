@@ -1,4 +1,4 @@
-import MemeGenerator from "@/components/Meme/MemeGenerator";
+import MemeGenerator from '@/components/Meme/MemeGenerator';
 
 export default function Test() {
   return (

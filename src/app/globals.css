@@ -18,11 +18,7 @@
 
 .vercel-container {
   color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
+  background: linear-gradient(to bottom, transparent, rgb(var(--background-end-rgb)))
     rgb(var(--background-start-rgb));
 }
 
@@ -64,12 +60,12 @@ img {
   height: 30px;
   margin-bottom: 5px;
   background-repeat: no-repeat;
-  background-image: url("/troll.png");
+  background-image: url('/troll.png');
   background-size: contain;
 }
 
 .notyf__toast::before {
-  content: "";
+  content: '';
   position: absolute;
   width: 10px;
   height: 100%;

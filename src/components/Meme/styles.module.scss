@@ -1,8 +1,7 @@
 .meme-generator {
   height: 100vh;
   color: rgb(var(--foreground-rgb));
-  background: linear-gradient(to bottom, transparent, rgb(255, 255, 255))
-    rgb(214, 219, 220);
+  background: linear-gradient(to bottom, transparent, rgb(255, 255, 255)) rgb(214, 219, 220);
 
   .meme-header {
     padding: 20px 5%;
@@ -41,8 +40,6 @@
         border-radius: 2px;
         max-width: 100%;
       }
-
-
     }
 
     .meme-random {

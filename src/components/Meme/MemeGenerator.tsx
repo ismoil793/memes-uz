@@ -1,19 +1,13 @@
-"use client";
-import React, {
-  ChangeEvent,
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
-import * as htmlToImage from "html-to-image";
-import styles from "./styles.module.scss";
-import Image from "next/image";
-import axios from "axios";
-import { downloadFile } from "@/utils/file";
-import { IMeme } from "@/constants/types";
-import MemePrintScreenTip from "@/components/Meme/MemePrintScreenTip";
-import {notifySuccess} from "@/utils/notify";
+'use client';
+import React, { ChangeEvent, useCallback, useEffect, useRef, useState } from 'react';
+import * as htmlToImage from 'html-to-image';
+import styles from './styles.module.scss';
+import Image from 'next/image';
+import axios from 'axios';
+import { downloadFile } from '@/utils/file';
+import { IMeme } from '@/constants/types';
+import MemePrintScreenTip from '@/components/Meme/MemePrintScreenTip';
+import { notifySuccess } from '@/utils/notify';
 
 interface TopTextPosition {
   top: number;
@@ -25,21 +19,25 @@ interface BottomTextPosition {
   left: number;
 }
 
+const pickRandomMeme = (memesArr: IMeme[]) => {
+  const randomNumber = Math.floor(Math.random() * memesArr.length);
+  return memesArr[randomNumber];
+};
+
 const MemeGenerator = () => {
-  const [textTop, setTextTop] = useState<string>("");
-  const [textBottom, setTextBottom] = useState<string>("");
+  const [textTop, setTextTop] = useState<string>('');
+  const [textBottom, setTextBottom] = useState<string>('');
   const [randomMeme, setRandomMeme] = useState<IMeme | null>(null);
   const [memes, setMemes] = useState<IMeme[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [topTextPosition, setTopTextPosition] = useState<TopTextPosition>({
     top: 15,
-    left: 15,
+    left: 15
   });
-  const [bottomTextPosition, setBottomTextPosition] =
-    useState<BottomTextPosition>({
-      bottom: 30,
-      left: 15,
-    });
+  const [bottomTextPosition, setBottomTextPosition] = useState<BottomTextPosition>({
+    bottom: 30,
+    left: 15
+  });
 
   const screenshotArea = useRef<HTMLDivElement>(null);
 
@@ -54,9 +52,10 @@ const MemeGenerator = () => {
   const fetchMemes = useCallback(async () => {
     try {
       setIsLoading(true);
-      const response = await axios.get("https://api.imgflip.com/get_memes");
+      const response = await axios.get('https://api.imgflip.com/get_memes');
       setMemes(response.data.data.memes);
-      setRandomMeme(response.data.data.memes[0]);
+      const randMeme = pickRandomMeme(response.data.data.memes);
+      setRandomMeme(randMeme);
     } catch (e: any) {
       console.error(e);
       alert(`Error while fetching memes: ${e.message}`);
@@ -65,30 +64,29 @@ const MemeGenerator = () => {
     }
   }, []);
 
-  const genRandomMeme = useCallback(() => {
-    const randomNumber = Math.floor(Math.random() * memes.length);
-    const randMeme = memes[randomNumber];
+  const handleGenerateMeme = useCallback(() => {
+    const randMeme = pickRandomMeme(memes);
     setRandomMeme(randMeme);
   }, [memes]);
 
   const onTopTextPositionChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setTopTextPosition((prev) => ({
+    setTopTextPosition(prev => ({
       ...prev,
-      [e.target.name]: Number(e.target.value),
+      [e.target.name]: Number(e.target.value)
     }));
   };
 
   const onBottomTextPositionChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setBottomTextPosition((prev) => ({
+    setBottomTextPosition(prev => ({
       ...prev,
-      [e.target.name]: Number(e.target.value),
+      [e.target.name]: Number(e.target.value)
     }));
   };
 
   const handleMemeDownload = async () => {
     if (!screenshotArea.current) return;
     await htmlToImage.toJpeg(screenshotArea.current).then(downloadFile);
-    notifySuccess("Meme saved as meme-shot.jpg")
+    notifySuccess('Meme saved as meme-shot.jpg');
   };
 
   useEffect(() => {
@@ -104,11 +102,7 @@ const MemeGenerator = () => {
 
       <div className={styles.memeGenWrapper}>
         <div className={styles.memeRandom}>
-          <div
-            className={styles.memeImgWrap}
-            ref={screenshotArea}
-            style={{ width: "fit-content" }}
-          >
+          <div className={styles.memeImgWrap} ref={screenshotArea} style={{ width: 'fit-content' }}>
             {isLoading ? (
               <div>Loading...</div>
             ) : (
@@ -119,7 +113,7 @@ const MemeGenerator = () => {
                   data-tooltip-id="meme-tooltip"
                   data-tooltip-place="right"
                 />
-                <p style={{ background: "#fff" }}>
+                <p style={{ background: '#fff' }}>
                   {'"'}
                   {randomMeme?.name}
                   {'"'} - generate your own meme at memes.uz
@@ -134,11 +128,7 @@ const MemeGenerator = () => {
               {textBottom}
             </h2>
           </div>
-          <div
-            onClick={handleMemeDownload}
-            className={styles.memeBtn}
-            style={{ marginTop: 20 }}
-          >
+          <div onClick={handleMemeDownload} className={styles.memeBtn} style={{ marginTop: 20 }}>
             Download meme
           </div>
         </div>
@@ -149,7 +139,7 @@ const MemeGenerator = () => {
               placeholder="Top Text"
               type="text"
               value={textTop}
-              style={{ width: "calc(100% - 200px)" }}
+              style={{ width: 'calc(100% - 200px)' }}
               onChange={onTextTopChange}
             />
             <input
@@ -175,7 +165,7 @@ const MemeGenerator = () => {
               placeholder="Bottom Text"
               type="text"
               value={textBottom}
-              style={{ width: "calc(100% - 200px)" }}
+              style={{ width: 'calc(100% - 200px)' }}
               onChange={onTextBottomChange}
             />
             <input
@@ -196,10 +186,7 @@ const MemeGenerator = () => {
             />
           </div>
 
-          <div
-            onClick={genRandomMeme}
-            className={`${styles.memeBtn} gen-random-meme`}
-          >
+          <div onClick={handleGenerateMeme} className={`${styles.memeBtn} gen-random-meme`}>
             Gen. Random meme
           </div>
         </div>
