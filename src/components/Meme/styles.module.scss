@@ -50,14 +50,11 @@
 
       .meme-img-wrap {
         position: relative;
-        //margin-bottom: 20px;
-        //padding-bottom: 20px;
 
         img {
           object-fit: contain;
           object-position: top left;
           width: 100%;
-          border-radius: 2px;
           height: 100%;
           max-height: calc(100vh - 300px);
         }
@@ -88,10 +85,6 @@
         .text-bottom {
           bottom: 15px;
         }
-      }
-
-      .gen-random-meme {
-        margin: 0 auto;
       }
     }
   }

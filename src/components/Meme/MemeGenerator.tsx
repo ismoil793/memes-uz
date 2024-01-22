@@ -11,16 +11,9 @@ import styles from "./styles.module.scss";
 import Image from "next/image";
 import axios from "axios";
 import { downloadFile } from "@/utils/file";
-
-interface Meme {
-  id: number;
-  name: string;
-  url: string;
-  width: number;
-  height: number;
-  box_count: number;
-  captions: number;
-}
+import { IMeme } from "@/constants/types";
+import MemePrintScreenTip from "@/components/Meme/MemePrintScreenTip";
+import {notifySuccess} from "@/utils/notify";
 
 interface TopTextPosition {
   top: number;
@@ -35,8 +28,8 @@ interface BottomTextPosition {
 const MemeGenerator = () => {
   const [textTop, setTextTop] = useState<string>("");
   const [textBottom, setTextBottom] = useState<string>("");
-  const [randomMeme, setRandomMeme] = useState<Meme | null>(null);
-  const [memes, setMemes] = useState<Meme[]>([]);
+  const [randomMeme, setRandomMeme] = useState<IMeme | null>(null);
+  const [memes, setMemes] = useState<IMeme[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [topTextPosition, setTopTextPosition] = useState<TopTextPosition>({
     top: 15,
@@ -95,7 +88,7 @@ const MemeGenerator = () => {
   const handleMemeDownload = async () => {
     if (!screenshotArea.current) return;
     await htmlToImage.toJpeg(screenshotArea.current).then(downloadFile);
-    alert("Meme saved as meme-shot.jpg");
+    notifySuccess("Meme saved as meme-shot.jpg")
   };
 
   useEffect(() => {
@@ -120,12 +113,18 @@ const MemeGenerator = () => {
               <div>Loading...</div>
             ) : (
               <div>
-                <img src={randomMeme?.url} alt="Random meme" />
+                <img
+                  src={randomMeme?.url}
+                  alt="Random meme"
+                  data-tooltip-id="meme-tooltip"
+                  data-tooltip-place="right"
+                />
                 <p style={{ background: "#fff" }}>
                   {'"'}
                   {randomMeme?.name}
                   {'"'} - generate your own meme at memes.uz
                 </p>
+                <MemePrintScreenTip />
               </div>
             )}
             <h2 className={styles.textTop} style={{ ...topTextPosition }}>

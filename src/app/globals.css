@@ -30,12 +30,67 @@ body * {
   font-family: monospace;
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
-}
-
 img {
   display: block;
+}
+
+/*---------------------------- Notifications ------------------------------*/
+.notyf {
+  color: #fff !important;
+}
+
+.notyf__toast {
+  max-width: 350px !important;
+  border-radius: 4px !important;
+}
+
+.notyf .notyf__wrapper {
+  flex-direction: column;
+  align-items: flex-start;
+  padding-left: 15px;
+  padding-right: 50px;
+}
+
+.notyf .notyf__message {
+  font-size: 18px;
+}
+
+.notyf__toast .notyf__icon {
+  width: 250px;
+}
+
+.notify-icon-img {
+  color: #fff !important;
+  height: 30px;
+  margin-bottom: 5px;
+  background-repeat: no-repeat;
+  background-image: url("/troll.png");
+  background-size: contain;
+}
+
+.notyf__toast::before {
+  content: "";
+  position: absolute;
+  width: 10px;
+  height: 100%;
+  background-color: #000;
+  z-index: 20;
+  left: 0;
+}
+
+.notyf__toast.notyf__toast--success .notyf__dismiss-btn,
+.notyf__toast.notyf__toast--success:before {
+  background-color: #6441a5;
+}
+
+.notyf__dismiss-btn {
+  opacity: 1 !important;
+}
+
+.notyf__dismiss-btn:hover {
+  opacity: 0.75 !important;
+}
+
+.notyf__dismiss-btn:focus {
+  outline: none;
 }
