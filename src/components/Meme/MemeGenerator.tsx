@@ -1,11 +1,14 @@
 "use client";
 import React, {
-  useState,
   ChangeEvent,
-  useEffect,
   useCallback,
+  useEffect,
   useRef,
+  useState,
 } from "react";
+// @ts-ignore
+import { createFileName } from "use-react-screenshot";
+import * as htmlToImage from "html-to-image";
 import styles from "./styles.module.scss";
 import Image from "next/image";
 import axios from "axios";
@@ -45,6 +48,8 @@ const MemeGenerator = () => {
       bottom: 30,
       left: 15,
     });
+
+  const screenshotArea = useRef<HTMLDivElement>(null);
 
   const onTextTopChange = (e: ChangeEvent<HTMLInputElement>) => {
     setTextTop(e.target.value);
@@ -88,6 +93,22 @@ const MemeGenerator = () => {
     }));
   };
 
+  const download = (
+    image: any,
+    { name = "meme-shot", extension = "jpg" } = {},
+  ) => {
+    const a = document.createElement("a");
+    a.href = image;
+    a.download = createFileName(extension, name);
+    a.click();
+  };
+
+  const handleMemeDownload = async () => {
+    if (!screenshotArea.current) return;
+    await htmlToImage.toJpeg(screenshotArea.current).then(download);
+    alert("Meme saved as meme-shot.jpg");
+  };
+
   useEffect(() => {
     fetchMemes();
   }, []);
@@ -96,19 +117,27 @@ const MemeGenerator = () => {
     <div className={styles.memeGenerator}>
       <header className={styles.memeHeader}>
         <Image width={100} height={80} src="/troll.png" alt="Troll face" />
-        <h1>Meme Generator</h1>
+        <h1>meme Generator</h1>
       </header>
 
       <div className={styles.memeGenWrapper}>
         <div className={styles.memeRandom}>
-          <div className={styles.memeImgWrap}>
+          <div
+            className={styles.memeImgWrap}
+            ref={screenshotArea}
+            style={{ width: "fit-content" }}
+          >
             {isLoading ? (
               <div>Loading...</div>
             ) : (
-              <figure>
+              <div>
                 <img src={randomMeme?.url} alt="Random meme" />
-                <figcaption>{randomMeme?.name}</figcaption>
-              </figure>
+                <p style={{ background: "#fff" }}>
+                  {'"'}
+                  {randomMeme?.name}
+                  {'"'} - generate your own meme at memes.uz
+                </p>
+              </div>
             )}
             <h2 className={styles.textTop} style={{ ...topTextPosition }}>
               {textTop}
@@ -117,8 +146,12 @@ const MemeGenerator = () => {
               {textBottom}
             </h2>
           </div>
-          <div onClick={genRandomMeme} className={styles.memeBtn}>
-            Copy meme
+          <div
+            onClick={handleMemeDownload}
+            className={styles.memeBtn}
+            style={{ marginTop: 20 }}
+          >
+            Download meme
           </div>
         </div>
 
@@ -128,7 +161,7 @@ const MemeGenerator = () => {
               placeholder="Top Text"
               type="text"
               value={textTop}
-              style={{width: 'calc(100% - 200px)'}}
+              style={{ width: "calc(100% - 200px)" }}
               onChange={onTextTopChange}
             />
             <input
@@ -136,14 +169,14 @@ const MemeGenerator = () => {
               placeholder="top"
               value={topTextPosition.top}
               name="top"
-              style={{width: 100}}
+              style={{ width: 100 }}
               onChange={onTopTextPositionChange}
             />
             <input
               type="number"
               placeholder="left"
               name="left"
-              style={{width: 100}}
+              style={{ width: 100 }}
               value={topTextPosition.left}
               onChange={onTopTextPositionChange}
             />
@@ -154,14 +187,14 @@ const MemeGenerator = () => {
               placeholder="Bottom Text"
               type="text"
               value={textBottom}
-              style={{width: 'calc(100% - 200px)'}}
+              style={{ width: "calc(100% - 200px)" }}
               onChange={onTextBottomChange}
             />
             <input
               type="number"
               placeholder="bottom"
               name="bottom"
-              style={{width: 100}}
+              style={{ width: 100 }}
               value={bottomTextPosition.bottom}
               onChange={onBottomTextPositionChange}
             />
@@ -169,7 +202,7 @@ const MemeGenerator = () => {
               type="number"
               placeholder="left"
               name="left"
-              style={{width: 100}}
+              style={{ width: 100 }}
               value={bottomTextPosition.left}
               onChange={onBottomTextPositionChange}
             />
@@ -179,7 +212,7 @@ const MemeGenerator = () => {
             onClick={genRandomMeme}
             className={`${styles.memeBtn} gen-random-meme`}
           >
-            Gen Random Meme
+            Gen. Random meme
           </div>
         </div>
       </div>
