@@ -6,12 +6,11 @@ import React, {
   useRef,
   useState,
 } from "react";
-// @ts-ignore
-import { createFileName } from "use-react-screenshot";
 import * as htmlToImage from "html-to-image";
 import styles from "./styles.module.scss";
 import Image from "next/image";
 import axios from "axios";
+import { downloadFile } from "@/utils/file";
 
 interface Meme {
   id: number;
@@ -93,19 +92,9 @@ const MemeGenerator = () => {
     }));
   };
 
-  const download = (
-    image: any,
-    { name = "meme-shot", extension = "jpg" } = {},
-  ) => {
-    const a = document.createElement("a");
-    a.href = image;
-    a.download = createFileName(extension, name);
-    a.click();
-  };
-
   const handleMemeDownload = async () => {
     if (!screenshotArea.current) return;
-    await htmlToImage.toJpeg(screenshotArea.current).then(download);
+    await htmlToImage.toJpeg(screenshotArea.current).then(downloadFile);
     alert("Meme saved as meme-shot.jpg");
   };
 
