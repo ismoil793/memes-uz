@@ -10,6 +10,7 @@
     "prettier": "prettier --write ."
   },
   "dependencies": {
+    "@vercel/analytics": "^1.1.2",
     "axios": "^1.6.5",
     "html-to-image": "^1.11.11",
     "next": "14.1.0",
