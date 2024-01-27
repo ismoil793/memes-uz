@@ -7,7 +7,7 @@ import axios from 'axios';
 import { downloadFile } from '@/utils/file';
 import { IMeme } from '@/constants/types';
 import MemePrintScreenTip from '@/components/Meme/MemePrintScreenTip';
-import { notifySuccess } from '@/utils/notify';
+import { notifySuccess as notifyToast } from '@/utils/notify';
 
 interface TopTextPosition {
   top: number;
@@ -85,8 +85,14 @@ const MemeGenerator = () => {
 
   const handleMemeDownload = async () => {
     if (!screenshotArea.current) return;
-    await htmlToImage.toJpeg(screenshotArea.current).then(downloadFile);
-    notifySuccess('Meme saved as meme-shot.jpg');
+
+    try {
+      const htmlToJpgRes = await htmlToImage.toJpeg(screenshotArea.current);
+      downloadFile(htmlToJpgRes)
+      notifyToast('Meme saved as meme-shot.jpg');
+    } catch (e: any) {
+      notifyToast(e.message);
+    }
   };
 
   useEffect(() => {

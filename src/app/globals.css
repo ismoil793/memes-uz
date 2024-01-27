@@ -92,6 +92,24 @@ img {
 
 
 @media (max-width: 1200px) {
+  .notyf .notyf__wrapper {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .notyf .notyf__message {
+    font-size: 12px;
+  }
+
+  .notyf__toast .notyf__icon {
+    width: 40px;
+    margin-right: 10px;
+  }
+
+  .notify-icon-img {
+    margin-bottom: 0;
+  }
+
   footer {
     position: relative !important;
     transform: none;
