@@ -39,6 +39,15 @@
         padding: 5px 10px;
         border-radius: 2px;
         max-width: 100%;
+        color: black;
+
+        &[type="text"] {
+          width: calc(100% - 200px);
+        }
+
+        &[type="number"] {
+          width: 100px;
+        }
       }
     }
 
@@ -55,6 +64,7 @@
           height: 100%;
           max-height: calc(100vh - 300px);
         }
+
         h2 {
           position: absolute;
           color: #ffffff;
@@ -79,8 +89,59 @@
         .text-top {
           top: 15px;
         }
+
         .text-bottom {
           bottom: 15px;
+        }
+      }
+    }
+  }
+
+
+  @media (max-width: 1200px) {
+    height: auto;
+
+    .meme-header {
+      padding: 15px 5%;
+
+      h1 {
+        font-size: 30px;
+        margin-left: 30px;
+      }
+
+      img {
+        width: 50px;
+      }
+    }
+
+
+    .meme-gen-wrapper {
+      flex-direction: column;
+
+      .meme-random {
+        .meme-img-wrap {
+          h2 {
+            font-size: 1.5em;
+            word-break: break-all;
+          }
+
+          p {
+            font-size: 11px;
+          }
+        }
+      }
+
+      .meme-moderate-area {
+        width: 100%;
+        margin-left: 0;
+        font-size: 12px;
+
+        input[type="text"] {
+          width: calc(100% - 140px);
+        }
+
+        input[type="number"] {
+          width: 70px;
         }
       }
     }
@@ -98,4 +159,10 @@
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
   cursor: pointer;
   font-size: 20px;
+
+
+  @media (max-width: 1200px) {
+    width: 100%;
+    font-size: 12px;
+  }
 }

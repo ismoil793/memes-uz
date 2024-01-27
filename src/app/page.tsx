@@ -11,7 +11,7 @@ export default function MemePage() {
     <div className="meme-container" style={styles.container}>
       <MemeGenerator />
       <footer style={styles.footer}>
-        <a href="https://shokirov.uz">&copy; 2024 Support the Project</a>
+        <a href="https://www.buymeacoffee.com/ismoil">&copy; 2024 Support the Project</a>
       </footer>
     </div>
   );
@@ -24,7 +24,7 @@ const styles: IMemePageStyle = {
   footer: {
     position: 'absolute',
     left: '50%',
-    bottom: 0,
+    bottom: 10,
     transform: 'translateX(-50%)'
   }
 };

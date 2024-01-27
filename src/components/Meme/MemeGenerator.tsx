@@ -93,6 +93,7 @@ const MemeGenerator = () => {
     fetchMemes();
   }, []);
 
+
   return (
     <div className={styles.memeGenerator}>
       <header className={styles.memeHeader}>
@@ -139,7 +140,6 @@ const MemeGenerator = () => {
               placeholder="Top Text"
               type="text"
               value={textTop}
-              style={{ width: 'calc(100% - 200px)' }}
               onChange={onTextTopChange}
             />
             <input
@@ -147,14 +147,12 @@ const MemeGenerator = () => {
               placeholder="top"
               value={topTextPosition.top}
               name="top"
-              style={{ width: 100 }}
               onChange={onTopTextPositionChange}
             />
             <input
               type="number"
               placeholder="left"
               name="left"
-              style={{ width: 100 }}
               value={topTextPosition.left}
               onChange={onTopTextPositionChange}
             />
@@ -165,14 +163,12 @@ const MemeGenerator = () => {
               placeholder="Bottom Text"
               type="text"
               value={textBottom}
-              style={{ width: 'calc(100% - 200px)' }}
               onChange={onTextBottomChange}
             />
             <input
               type="number"
               placeholder="bottom"
               name="bottom"
-              style={{ width: 100 }}
               value={bottomTextPosition.bottom}
               onChange={onBottomTextPositionChange}
             />
@@ -180,7 +176,6 @@ const MemeGenerator = () => {
               type="number"
               placeholder="left"
               name="left"
-              style={{ width: 100 }}
               value={bottomTextPosition.left}
               onChange={onBottomTextPositionChange}
             />

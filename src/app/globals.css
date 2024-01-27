@@ -18,8 +18,7 @@
 
 .vercel-container {
   color: rgb(var(--foreground-rgb));
-  background: linear-gradient(to bottom, transparent, rgb(var(--background-end-rgb)))
-    rgb(var(--background-start-rgb));
+  background: linear-gradient(to bottom, transparent, rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
 }
 
 body * {
@@ -89,4 +88,13 @@ img {
 
 .notyf__dismiss-btn:focus {
   outline: none;
+}
+
+
+@media (max-width: 1200px) {
+  footer {
+    position: relative !important;
+    transform: none;
+    text-align: center;
+  }
 }
