@@ -99,15 +99,6 @@ const MemeGenerator = () => {
 
   useEffect(() => {
     fetchMemes();
-
-    const isMobileDevice = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-
-    if (isMobileDevice && screenshotArea.current) {
-      console.log('here')
-      // Set the canvas size explicitly for mobile devices
-      screenshotArea.current.style.width = '100%';
-      screenshotArea.current.style.height = 'auto';
-    }
   }, []);
 
   return (

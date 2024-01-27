@@ -146,6 +146,22 @@
       }
     }
   }
+
+  @media (max-width: 576px) {
+    .meme-gen-wrapper {
+      .meme-moderate-area {
+        margin-top: 20px;
+
+        input[type="text"] {
+          width: 100%;
+        }
+
+        input[type="number"] {
+          display: none;
+        }
+      }
+    }
+  }
 }
 
 .meme-btn {
@@ -164,5 +180,9 @@
   @media (max-width: 1200px) {
     width: 100%;
     font-size: 16px;
+  }
+
+  @media (max-width: 576px) {
+    display: none;
   }
 }
