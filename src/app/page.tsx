@@ -11,7 +11,7 @@ export default function MemePage() {
     <div className="meme-container" style={styles.container}>
       <MemeGenerator />
       <footer style={styles.footer}>
-        &copy; <a href="https://shokirov.uz">https://shokirov.uz</a>
+        <a href="https://shokirov.uz">&copy; 2024 Support the Project</a>
       </footer>
     </div>
   );

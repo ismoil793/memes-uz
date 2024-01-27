@@ -1,1 +1,1 @@
-export const isMac = navigator?.platform?.toUpperCase().includes('MAC');
+export const isMac = typeof window !== 'undefined' && navigator?.platform?.toUpperCase().includes('MAC');
