@@ -8,7 +8,7 @@ const icon: INotyfIcon = {
   color: '#fff'
 };
 
-export function notifySuccess(msg: any, duration = 4000) {
+export function notifySuccess(msg: any, duration = 4000_000) {
   const notyf = new Notyf({
     types: [
       {

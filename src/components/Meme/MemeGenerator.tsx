@@ -88,8 +88,10 @@ const MemeGenerator = () => {
 
     try {
       const htmlToJpgRes = await htmlToImage.toJpeg(screenshotArea.current);
-      downloadFile(htmlToJpgRes)
       notifyToast('Meme saved as meme-shot.jpg');
+      // Wait for the conversion to complete before downloading
+      await new Promise(resolve => setTimeout(resolve, 1000)); // Adjust the delay as needed
+      downloadFile(htmlToJpgRes)
     } catch (e: any) {
       notifyToast(e.message);
     }
